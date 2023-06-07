@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-color: rgba(255, 228, 196, 0.568);
+}
+
+h1 {
+    font-size: 55px;
+    color: rgb(0, 159, 185);
+    text-shadow: rgba(0, 0, 0, 0.164) 0.1em 0.1em 0.1em;
+}
+
+button {
+    background-color: rgb(10, 159, 185);
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+#parabens {
+    margin-top: 80px;
+    font-size: 85px;
+    font-weight: bold;
+    color: rgb(2, 116, 2);
+    text-shadow: rgba(0, 0, 0, 0.514) 0.1em 0.1em 0.1em;
+}
+
+#resultado {
+    color: rgb(4, 4, 175);
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 38px;
+    padding-top: 20px;
+}
+
+button:hover {
+    background-color: rgb(216, 7, 35);
+}
