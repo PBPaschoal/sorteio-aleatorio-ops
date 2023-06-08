@@ -1,25 +1,3 @@
-/*function realizarSorteio() {
-    var apartamentos = []; 
-
-    for (var i = 1; i <= 30; i++) {
-        apartamentos.push(i); 
-    }
-
-    var sorteio = []; 
-
-    for (var j = 0; j < 3; j++) {
-        var randomIndex = Math.floor(Math.random() * apartamentos.length);
-        sorteio.push(apartamentos[randomIndex]);
-        apartamentos.splice(randomIndex, 1); 
-    }
-
-    var resultado = "1º Lugar: " + sorteio[0] + "<br>2º Lugar: " + sorteio[1] + "<br>3º Lugar: " + sorteio[2];
-
-    document.getElementById("resultados").innerHTML = resultado; 
-
-    document.getElementById("parabens").innerHTML = "Parabéns!"; 
-}*/
-
 var apartamentos = [
     101, 102, 103, 104, 105, 106,
     201, 202, 203, 204, 205, 206,
@@ -51,28 +29,33 @@ function shuffle(array) {
 function realizarSorteio() {
     var resultadoDiv = document.getElementById("resultado");
     resultadoDiv.innerHTML = ""; // Limpa o conteúdo anterior
-
     var numerosSorteados = [];
+
     if (sorteioRealizado < numerosEspecificos.length) {
         numerosSorteados = numerosEspecificos[sorteioRealizado];
+    } else {
+        numerosSorteados = numerosDisponiveis.splice(0, 3); // Seleciona os próximos 3 números disponíveis    
     }
 
-    var numerosAleatorios = [];
-
+    var numerosUtilizados = [];
     for (var i = 0; i < 30; i++) {
         var resultado = "";
         if (i < numerosSorteados.length) {
             resultado = numerosSorteados[i];
-            numerosDisponiveis.splice(numerosDisponiveis.indexOf(resultado), 1); // Remove o número especificado dos disponíveis
+            numerosUtilizados.push(resultado);
         } else {
-            if (numerosDisponiveis.length === 0) {
-                numerosDisponiveis = apartamentos.slice(); // Reabastece a lista de números disponíveis
-                shuffle(numerosDisponiveis); // Embaralha a ordem dos números disponíveis
+            var numerosDisponiveisFiltrados = numerosDisponiveis.filter(function (num) {
+                return numerosUtilizados.indexOf(num) === -1;
+            });
+            if (numerosDisponiveisFiltrados.length === 0) {
+                numerosUtilizados = [];
+                numerosDisponiveisFiltrados = numerosDisponiveis.slice();
             }
-            resultado = numerosDisponiveis.pop();
+            var index = Math.floor(Math.random() * numerosDisponiveisFiltrados.length);
+            resultado = numerosDisponiveisFiltrados[index];
+            numerosUtilizados.push(resultado);
         }
         resultadoDiv.innerHTML += (i + 1) + "º - Apartamento: " + resultado + "<br>";
     }
-
     sorteioRealizado++;
 }
